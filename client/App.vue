@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+    <div>
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
+    </div>
 </template>
 
-<script setup lang="ts">
-let a = 1;
-</script>
+<script setup lang="ts"></script>

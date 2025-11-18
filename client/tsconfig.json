@@ -1,4 +1,14 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "/.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "types": ["nuxt"],
+    "module": "ESNext",
+    "target": "ESNext",  // или ES2020, если у тебя проблемы с более новым стандартом
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,  // Включаем строгую проверку типов
+    "skipLibCheck": true,  // Пропускаем проверку типов в библиотеках
+    "resolveJsonModule": true,  // Если работаешь с JSON
+    "lib": ["ESNext", "DOM"]  // Можно добавить поддержку последних функций JavaScript
+  }
 }

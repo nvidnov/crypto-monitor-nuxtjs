@@ -1,13 +1,14 @@
 <script setup lang="ts">
-
+const { data, pending, error } = useFetch('/api/test');
+console.log(data);
 </script>
 
 <template>
-  <div>
-    <h1>Hello World</h1>
-  </div>
+    <div>
+        <h1>Data: {{ data }}</h1>
+        <h1>Pending: {{ pending }}</h1>
+        <h1>{{ error }}</h1>
+    </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
