@@ -1,11 +1,28 @@
-// server/middleware/auth.global.ts
 export default defineEventHandler((event) => {
     const token = getCookie(event, 'auth_token')
 
-    // Если пользователь уже на /auth/login, не редиректим
-    if (!token && !event.path.startsWith('/auth/login')) {
-        event.res.setHeader('location', '/auth/login')
-        event.res.statusCode = 302
-        event.res.end()
+    const publicPaths = [
+        '/auth/login',
+        '/auth/register',
+        '/_nuxt',
+        '/api',
+        '/favicon.ico'
+    ]
+
+    const isPublicPath = publicPaths.some(path => event.path?.startsWith(path))
+    const isAuthPage = event.path?.startsWith('/auth')
+
+    // Неавторизованный пользователь
+    if (!token && !isPublicPath) {
+        event.node.res.setHeader('location', '/auth/login')
+        event.node.res.statusCode = 302
+        event.node.res.end()
+    }
+
+    // Авторизованный пользователь
+    if (token && isAuthPage) {
+        event.node.res.setHeader('location', '/')
+        event.node.res.statusCode = 302
+        event.node.res.end()
     }
 })

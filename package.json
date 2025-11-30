@@ -14,7 +14,7 @@
     "@nuxt/ui": "^4.2.1",
     "@pinia/nuxt": "^0.11.3",
     "@tailwindcss/vite": "^4.1.17",
-    "nuxt": "^3.15.4",
+    "nuxt": "^4.2.1",
     "tailwindcss": "^4.1.17",
     "vue": "latest",
     "vue-router": "latest"

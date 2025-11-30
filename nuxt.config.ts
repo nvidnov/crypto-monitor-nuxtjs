@@ -15,9 +15,9 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
     ],
     router: {
-        middleware: ['auth.client']
+        middleware: ['auth']
     },
-    css: [],
+    css: ['~/assets/css/main.css'],
     postcss: {
         plugins: {
             "@tailwindcss/postcss": {},

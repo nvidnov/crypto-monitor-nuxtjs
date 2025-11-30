@@ -1,15 +1,9 @@
-import { useUserStore } from '~/stores/user'
-
+// middleware/auth.ts
 export default defineNuxtRouteMiddleware((to) => {
     const userStore = useUserStore()
-
-    // Неавторизованный пользователь пытается попасть на защищённую страницу
-    if (!userStore.isLoggedIn && to.path !== '/auth/login') {
+    console.log('13')
+    // Только дополнительная проверка на клиенте
+    if (process.client && !userStore.isLoggedIn && !to.path.startsWith('/auth')) {
         return navigateTo('/auth/login')
-    }
-
-    // Авторизованный пользователь пытается зайти на /auth/login
-    if (userStore.isLoggedIn && to.path.startsWith('/auth')) {
-        return navigateTo('/')
     }
 })

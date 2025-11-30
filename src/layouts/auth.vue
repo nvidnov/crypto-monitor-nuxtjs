@@ -1,7 +1,9 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <UHeader title="Авторизация" />
+
+  <UContainer class="max-w-sm mx-auto p-6">
     <NuxtPage />
-  </div>
+  </UContainer>
 </template>
 
 <script setup lang="ts">
