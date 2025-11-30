@@ -9,7 +9,21 @@ export default defineNuxtConfig({
     typescript: {
         strict: true,
     },
-    modules: ['@nuxt/eslint'],
+    modules: [
+        '@nuxt/eslint',
+        '@nuxt/ui',
+        '@pinia/nuxt',
+    ],
+    router: {
+        middleware: ['auth.client']
+    },
+    css: [],
+    postcss: {
+        plugins: {
+            "@tailwindcss/postcss": {},
+            autoprefixer: {},
+        },
+    },
     eslint: {
         // options here
     },

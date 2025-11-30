@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { data, pending, error } = useFetch('/api/test');
-console.log(data);
 </script>
 
 <template>
@@ -11,4 +10,6 @@ console.log(data);
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
