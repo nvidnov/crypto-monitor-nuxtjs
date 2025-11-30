@@ -14,6 +14,12 @@ export default defineNuxtConfig({
         '@nuxt/ui',
         '@pinia/nuxt',
     ],
+    components: [
+        {
+            path: '~/features',
+            pathPrefix: false
+        }
+    ],
     router: {
         middleware: ['auth']
     },
