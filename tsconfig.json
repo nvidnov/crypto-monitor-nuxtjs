@@ -3,12 +3,25 @@
   "compilerOptions": {
     "types": ["nuxt"],
     "module": "ESNext",
-    "target": "ESNext",  // или ES2020, если у тебя проблемы с более новым стандартом
+    "target": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "strict": true,  // Включаем строгую проверку типов
-    "skipLibCheck": true,  // Пропускаем проверку типов в библиотеках
-    "resolveJsonModule": true,  // Если работаешь с JSON
-    "lib": ["ESNext", "DOM"]  // Можно добавить поддержку последних функций JavaScript
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "lib": ["ESNext", "DOM"],
+
+    "baseUrl": ".",                    // ← ОБЯЗАТЕЛЬНО
+    "paths": {                         // ← Самое важное для автокомплита
+      "~/*": ["src/*"],
+      "@/*": ["src/*"],
+
+      "@shared/*": ["src/shared/*"],
+      "@entities/*": ["src/entities/*"],
+      "@features/*": ["src/features/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@pages/*": ["src/pages/*"],
+      "@stores/*": ["src/stores/*"]
+    }
   }
 }

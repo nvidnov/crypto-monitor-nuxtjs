@@ -1,12 +1,12 @@
 <template>
   <UPageSection class="flex">
-    <AuthFormSection />
+    <LoginFormSection />
   </UPageSection>
 </template>
 
 <script setup lang="ts">
 
 definePageMeta({
-  layout: 'auth'
+  layout: 'auth',
 })
 </script>

@@ -21,7 +21,7 @@ export default defineNuxtConfig({
         }
     ],
     router: {
-        middleware: ['auth']
+        middleware: []
     },
     css: ['~/assets/css/main.css'],
     postcss: {

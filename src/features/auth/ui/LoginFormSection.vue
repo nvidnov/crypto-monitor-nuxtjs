@@ -4,7 +4,11 @@
         icon="i-lucide-user"
         :fields="fields"
         class="max-w-lg mx-auto"
-    />
+    >
+      <template #description>
+        У вас нет аккаунта? <ULink to="register" class="text-primary font-medium">Зарегистрируйтесь</ULink>.
+      </template>
+    </UAuthForm>
 </template>
 
 <script setup lang="ts">
