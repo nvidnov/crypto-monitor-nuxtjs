@@ -20,9 +20,7 @@ export default defineNuxtConfig({
             pathPrefix: false
         }
     ],
-    router: {
-        middleware: []
-    },
+    router: {},
     css: ['~/assets/css/main.css'],
     postcss: {
         plugins: {
