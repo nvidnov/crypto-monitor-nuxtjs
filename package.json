@@ -19,7 +19,8 @@
     "pinia": "^3.0.4",
     "tailwindcss": "^4.1.17",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

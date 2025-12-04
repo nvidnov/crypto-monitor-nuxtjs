@@ -10,18 +10,16 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "lib": ["ESNext", "DOM"],
-
-    "baseUrl": ".",                    // ← ОБЯЗАТЕЛЬНО
-    "paths": {                         // ← Самое важное для автокомплита
+    "baseUrl": ".",
+    "paths": {
       "~/*": ["src/*"],
       "@/*": ["src/*"],
-
-      "@shared/*": ["src/shared/*"],
-      "@entities/*": ["src/entities/*"],
-      "@features/*": ["src/features/*"],
-      "@widgets/*": ["src/widgets/*"],
-      "@pages/*": ["src/pages/*"],
-      "@stores/*": ["src/stores/*"]
+      "@/shared/*": ["src/shared/*"],
+      "@/entities/*": ["src/entities/*"],
+      "@/features/*": ["src/features/*"],
+      "@/widgets/*": ["src/widgets/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/stores/*": ["src/stores/*"]
     }
   }
 }
