@@ -11,7 +11,12 @@
       >.
     </p>
 
-    <UForm :schema="schema" :state="form" @submit="onSubmit" class="space-y-6">
+    <UForm
+      :schema="schema"
+      :state="form"
+      @submit="fetchSendVerificationCode"
+      class="space-y-6"
+    >
       <!-- First Name -->
       <UFormField label="First Name" name="firstName" required>
         <template #label>
@@ -102,10 +107,15 @@
 <script setup lang="ts">
 import { useRegisterForm } from "@/features/auth/composable/useRegisterForm";
 
-const { form, registerSchema: schema, onSubmit } = useRegisterForm();
 definePageMeta({
   layout: "auth",
 });
+const emit = defineEmits(["setForm"]);
+const {
+  form,
+  registerSchema: schema,
+  fetchSendVerificationCode,
+} = useRegisterForm(emit);
 </script>
 
 <style scoped></style>

@@ -11,3 +11,4 @@ yarn-error.log*
 .output
 .idea
 .vscode/*
+/.yarn/install-state.gz

@@ -6,10 +6,17 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+  runtimeConfig: {
+    // Public keys that are exposed to the client
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || "localhost:3001",
+    },
+  },
   typescript: {
     strict: true,
   },
   modules: ["@nuxt/eslint", "@nuxt/ui", "@pinia/nuxt"],
+  plugins: ["~/shared/plugin/api.ts"],
   alias: {
     "@shared": "src/shared",
     "@entities": "src/entities",
