@@ -1,6 +1,10 @@
 <template>
   <UPageSection>
-    <PinFormSection v-if="!isLoading" @fetchPin="onHandlerFetchPin" />
+    <PinFormSection
+      v-if="!isLoading"
+      @fetchPin="onHandlerFetchPin"
+      :error="messageError"
+    />
     <SkeletonVerificationFormSection v-else />
   </UPageSection>
 </template>
@@ -10,26 +14,27 @@ import SkeletonVerificationFormSection from "~/features/auth/ui/SkeletonVerifica
 import PinFormSection from "~/features/auth/ui/PinFormSection.vue";
 import { useRegisterForm } from "~/features/auth/composable/useRegisterForm";
 import { useRegistrationStore } from "~/entities/auth/model/registration";
+import { ref } from "vue";
 
 definePageMeta({
   label: "auth",
 });
 
-const registrationStore = useRegistrationStore();
-const { form } = registrationStore;
+const store = useRegistrationStore();
 const registerForm = useRegisterForm();
 const { isLoading, fetchCheckVerificationCode } = registerForm;
 
-showToast();
-
-async function showToast() {}
+const messageError = ref<string | null>(null);
 
 const onHandlerFetchPin = async (code: string) => {
   const payload = {
-    email: form.email,
+    email: store.form.email,
     code: code,
   };
-  await fetchCheckVerificationCode(payload);
+  const { error } = await fetchCheckVerificationCode(payload);
+  if (error) {
+    messageError.value = error || null;
+  }
 };
 </script>
 

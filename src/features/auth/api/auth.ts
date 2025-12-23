@@ -2,6 +2,7 @@ import type {
   IPayloadCheckVerificationCode,
   IPayloadRegister,
   IPayloadVerificationCode,
+  IResolveCheckVerificationCode,
 } from "~/entities/user/types";
 import { useApi } from "~/shared/composable/useApi";
 
@@ -23,7 +24,9 @@ export function sendVerificationCode(payload: IPayloadVerificationCode) {
   });
 }
 
-export function checkVerificationCode(payload: IPayloadCheckVerificationCode) {
+export function checkVerificationCode(
+  payload: IPayloadCheckVerificationCode,
+): Promise<IResolveCheckVerificationCode> {
   const api = useApi();
 
   return api("/verification/check", {

@@ -13,7 +13,7 @@
 
     <UForm
       :schema="schema"
-      :state="form"
+      :state="store.form"
       @submit="fetchSendVerificationCode"
       class="space-y-6"
     >
@@ -23,7 +23,7 @@
           <span class="text-sm font-medium text-gray-700">First Name</span>
         </template>
         <UInput
-          v-model="form.firstName"
+          v-model="store.form.firstName"
           placeholder=""
           size="lg"
           class="w-full"
@@ -36,7 +36,7 @@
           <span class="text-sm font-medium text-gray-700">Last Name</span>
         </template>
         <UInput
-          v-model="form.lastName"
+          v-model="store.form.lastName"
           placeholder=""
           size="lg"
           class="w-full"
@@ -48,7 +48,12 @@
         <template #label>
           <span class="text-sm font-medium text-gray-700">Login</span>
         </template>
-        <UInput v-model="form.login" placeholder="" size="lg" class="w-full" />
+        <UInput
+          v-model="store.form.login"
+          placeholder=""
+          size="lg"
+          class="w-full"
+        />
       </UFormField>
 
       <!-- Email -->
@@ -56,7 +61,12 @@
         <template #label>
           <span class="text-sm font-medium text-gray-700">Email</span>
         </template>
-        <UInput v-model="form.email" placeholder="" size="lg" class="w-full" />
+        <UInput
+          v-model="store.form.email"
+          placeholder=""
+          size="lg"
+          class="w-full"
+        />
       </UFormField>
 
       <!-- Password -->
@@ -65,7 +75,7 @@
           <span class="text-sm font-medium text-gray-700">Password</span>
         </template>
         <UInput
-          v-model="form.password"
+          v-model="store.form.password"
           type="password"
           placeholder=""
           size="lg"
@@ -81,7 +91,7 @@
           </span>
         </template>
         <UInput
-          v-model="form.confirmPassword"
+          v-model="store.form.confirmPassword"
           type="password"
           placeholder=""
           size="lg"
@@ -106,16 +116,13 @@
 
 <script setup lang="ts">
 import { useRegisterForm } from "@/features/auth/composable/useRegisterForm";
+import { useRegistrationStore } from "~/entities/auth/model/registration";
 
 definePageMeta({
   layout: "auth",
 });
-const emit = defineEmits(["setForm"]);
-const {
-  form,
-  registerSchema: schema,
-  fetchSendVerificationCode,
-} = useRegisterForm(emit);
+const store = useRegistrationStore();
+const { registerSchema: schema, fetchSendVerificationCode } = useRegisterForm();
 </script>
 
 <style scoped></style>

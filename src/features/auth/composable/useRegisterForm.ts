@@ -4,26 +4,24 @@ import {
   checkVerificationCode,
   sendVerificationCode,
 } from "~/features/auth/api/auth";
-import type { IPayloadCheckVerificationCode } from "~/entities/user/types";
+import type {
+  IPayloadCheckVerificationCode,
+  IResolveCheckVerificationCode,
+  IResult,
+} from "~/entities/user/types";
+import { useRegistrationStore } from "~/entities/auth/model/registration";
 
-export function useRegisterForm(emit?: any) {
-  const form = reactive({
-    firstName: "",
-    lastName: "",
-    login: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+export function useRegisterForm() {
   const isLoading = ref(false);
+  const store = useRegistrationStore();
 
   const fetchSendVerificationCode = async () => {
     isLoading.value = true;
     try {
-      await sendVerificationCode({ email: form.email });
-      emit("setForm", form);
+      await sendVerificationCode({ email: store.form.email });
+      store.nextStep();
     } catch (error) {
-      console.error("Ошибка регистрации:", error);
+      console.error("Ошибка верификации:", error);
     } finally {
       isLoading.value = false;
     }
@@ -31,19 +29,31 @@ export function useRegisterForm(emit?: any) {
 
   const fetchCheckVerificationCode = async (
     payload: IPayloadCheckVerificationCode,
-  ) => {
+  ): Promise<IResult<IResolveCheckVerificationCode | null>> => {
+    const result: IResult<IResolveCheckVerificationCode> = {
+      success: null,
+      error: null,
+    };
     isLoading.value = true;
     try {
-      await checkVerificationCode(payload);
+      const data = await checkVerificationCode(payload);
+
+      if (data) {
+        result.success = data;
+        store.nextStep();
+      }
     } catch (error: any) {
+      if (error) {
+        result.error = error.data.message;
+      }
       console.error("Ошибка регистрации:", error);
     } finally {
       isLoading.value = false;
     }
+    return result;
   };
 
   return {
-    form,
     isLoading,
     registerSchema,
     fetchSendVerificationCode,
