@@ -1,9 +1,12 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import type { IRegisterForm } from "~/entities/auth/types";
+import { registerSchema } from "~/entities/auth/register.schema";
 
 export const useRegistrationStore = defineStore("registration", () => {
   const step = ref(1);
+  const schema = registerSchema;
+
   let form = reactive<IRegisterForm>({
     firstName: "",
     lastName: "",
@@ -30,5 +33,5 @@ export const useRegistrationStore = defineStore("registration", () => {
     });
   };
 
-  return { step, form, nextStep, prevStep, setForm, resetForm };
+  return { step, form, schema, nextStep, prevStep, setForm, resetForm };
 });

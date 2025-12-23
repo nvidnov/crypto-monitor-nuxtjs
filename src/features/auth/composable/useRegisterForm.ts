@@ -1,5 +1,4 @@
 import { ref } from "vue";
-import { registerSchema } from "~/entities/auth/register.schema";
 import {
   checkVerificationCode,
   sendVerificationCode,
@@ -55,7 +54,6 @@ export function useRegisterForm() {
 
   return {
     isLoading,
-    registerSchema,
     fetchSendVerificationCode,
     fetchCheckVerificationCode,
   };

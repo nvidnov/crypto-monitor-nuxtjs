@@ -27,6 +27,8 @@ const { isLoading, fetchCheckVerificationCode } = registerForm;
 const messageError = ref<string | null>(null);
 
 const onHandlerFetchPin = async (code: string) => {
+  messageError.value = null;
+
   const payload = {
     email: store.form.email,
     code: code,

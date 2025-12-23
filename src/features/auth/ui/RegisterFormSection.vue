@@ -12,7 +12,7 @@
     </p>
 
     <UForm
-      :schema="schema"
+      :schema="store.schema"
       :state="store.form"
       @submit="fetchSendVerificationCode"
       class="space-y-6"
@@ -122,7 +122,7 @@ definePageMeta({
   layout: "auth",
 });
 const store = useRegistrationStore();
-const { registerSchema: schema, fetchSendVerificationCode } = useRegisterForm();
+const { fetchSendVerificationCode } = useRegisterForm();
 </script>
 
 <style scoped></style>
