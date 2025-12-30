@@ -22,6 +22,10 @@ export interface IResolveCheckVerificationCode {
   verified: boolean;
 }
 
+export interface IResolveRegistration {
+  verified: boolean;
+}
+
 export interface IResult<T> {
   success: T | null;
   error: string | null;

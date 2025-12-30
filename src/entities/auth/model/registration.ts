@@ -2,12 +2,19 @@ import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import type { IRegisterForm } from "~/entities/auth/types";
 import { registerSchema } from "~/entities/auth/register.schema";
+import type {
+  IPayloadRegister,
+  IResolveRegistration,
+  IResult,
+} from "~/entities/user/types";
+import { register } from "~/features/auth/api/auth";
 
 export const useRegistrationStore = defineStore("registration", () => {
   const step = ref(1);
+  const isLoading = ref(false);
   const schema = registerSchema;
 
-  let form = reactive<IRegisterForm>({
+  const form = reactive<IRegisterForm>({
     firstName: "",
     lastName: "",
     login: "",
@@ -27,11 +34,50 @@ export const useRegistrationStore = defineStore("registration", () => {
     step.value = step.value - 1;
   };
 
+  const resetStep = () => {
+    step.value = 1;
+  };
+
   const resetForm = () => {
     (Object.keys(form) as Array<keyof IRegisterForm>).forEach((key) => {
       form[key] = "";
     });
   };
 
-  return { step, form, schema, nextStep, prevStep, setForm, resetForm };
+  const fetchRegistrationUser = async (payload: IPayloadRegister) => {
+    const result: IResult<IResolveRegistration> = {
+      success: null,
+      error: null,
+    };
+    isLoading.value = true;
+    try {
+      const response = await register(payload);
+      if (response) {
+        result.success = response;
+        resetStep();
+        resetForm();
+      }
+    } catch (error: any) {
+      if (error) {
+        result.error = error.data.message;
+        result.success = null;
+      }
+      console.error("Ошибка регистрации:", error);
+    } finally {
+      isLoading.value = false;
+    }
+    return result;
+  };
+
+  return {
+    step,
+    form,
+    schema,
+    nextStep,
+    prevStep,
+    resetStep,
+    setForm,
+    resetForm,
+    fetchRegistrationUser,
+  };
 });

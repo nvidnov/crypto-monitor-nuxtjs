@@ -118,9 +118,6 @@
 import { useRegisterForm } from "@/features/auth/composable/useRegisterForm";
 import { useRegistrationStore } from "~/entities/auth/model/registration";
 
-definePageMeta({
-  layout: "auth",
-});
 const store = useRegistrationStore();
 const { fetchSendVerificationCode } = useRegisterForm();
 </script>

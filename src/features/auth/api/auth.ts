@@ -3,10 +3,13 @@ import type {
   IPayloadRegister,
   IPayloadVerificationCode,
   IResolveCheckVerificationCode,
+  IResolveRegistration,
 } from "~/entities/user/types";
 import { useApi } from "~/shared/composable/useApi";
 
-export function register(payload: IPayloadRegister) {
+export function register(
+  payload: IPayloadRegister,
+): Promise<IResolveRegistration> {
   const api = useApi();
 
   return api("/api/users/create", {
