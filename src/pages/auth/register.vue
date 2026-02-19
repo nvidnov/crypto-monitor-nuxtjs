@@ -19,12 +19,15 @@ const onHandlerSetForm = (form: IRegisterForm) => {
   setForm(form);
   nextStep();
 };
+
 const stepForm = computed(() =>
   store.step === 1 ? RegisterFormSection : VerificationFormSection,
 );
+
 onMounted(() => {
   store.resetStep();
 });
+
 </script>
 
 <style scoped></style>

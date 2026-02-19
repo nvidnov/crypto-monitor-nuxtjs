@@ -17,7 +17,7 @@ import SkeletonVerificationFormSection from "~/features/auth/ui/SkeletonVerifica
 import PinFormSection from "~/features/auth/ui/PinFormSection.vue";
 import { useRegisterForm } from "~/features/auth/composable/useRegisterForm";
 import { useRegistrationStore } from "~/entities/auth/model/registration";
-import { ref, toValue } from "vue";
+import { ref } from "vue";
 
 const store = useRegistrationStore();
 const registerForm = useRegisterForm();
@@ -45,8 +45,8 @@ const onHandlerFetchPin = async (code: string) => {
     if (registrationError) {
       throw registrationError;
     }
-  } catch (error) {
-    messageError.value = error;
+  } catch (error: unknown) {
+    messageError.value = (error) as string;
   }
 };
 </script>
