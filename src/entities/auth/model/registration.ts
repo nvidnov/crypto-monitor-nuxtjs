@@ -58,11 +58,15 @@ export const useRegistrationStore = defineStore("registration", () => {
         resetForm();
       }
     } catch (error: any) {
-      if (error) {
-        result.error = error.data.message;
-        result.success = null;
-      }
+      const message =
+        error?.data?.message ||
+        error?.response?._data?.message ||
+        error?.message ||
+        "Ошибка регистрации";
+      result.error = String(message);
+      result.success = null;
       console.error("Ошибка регистрации:", error);
+      throw error;
     } finally {
       isLoading.value = false;
     }

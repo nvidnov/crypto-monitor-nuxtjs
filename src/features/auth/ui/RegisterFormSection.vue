@@ -14,7 +14,7 @@
     <UForm
       :schema="store.schema"
       :state="store.form"
-      @submit="fetchSendVerificationCode"
+      @submit="onSubmit"
       class="space-y-6"
     >
       <!-- First Name -->
@@ -120,6 +120,12 @@ import { useRegistrationStore } from "~/entities/auth/model/registration";
 
 const store = useRegistrationStore();
 const { fetchSendVerificationCode } = useRegisterForm();
+
+const onSubmit = async (payload: unknown) => {
+  (payload as Event).preventDefault();
+
+  await fetchSendVerificationCode();
+};
 </script>
 
 <style scoped></style>

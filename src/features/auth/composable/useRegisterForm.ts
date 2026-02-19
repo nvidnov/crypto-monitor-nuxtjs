@@ -1,14 +1,8 @@
 import { ref } from "vue";
-import {
-  checkVerificationCode,
-  register,
-  sendVerificationCode,
-} from "~/features/auth/api/auth";
+import { checkVerificationCode, sendVerificationCode } from "~/features/auth/api/auth";
 import type {
   IPayloadCheckVerificationCode,
-  IPayloadRegister,
   IResolveCheckVerificationCode,
-  IResolveRegistration,
   IResult,
 } from "~/entities/user/types";
 import { useRegistrationStore } from "~/entities/auth/model/registration";
@@ -70,10 +64,14 @@ export function useRegisterForm() {
         store.nextStep();
       }
     } catch (error: any) {
-      if (error) {
-        result.error = error.data.message;
-      }
+      const message =
+        error?.data?.message ||
+        error?.response?._data?.message ||
+        error?.message ||
+        "Ошибка проверки кода";
+      result.error = String(message);
       console.error("Ошибка регистрации:", error);
+      throw error;
     } finally {
       isLoading.value = false;
     }

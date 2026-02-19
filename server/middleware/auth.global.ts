@@ -1,7 +1,7 @@
 export default defineEventHandler((event) => {
     const token = getCookie(event, 'auth_token')
 
-    const publicPaths = ['/auth/login', '/auth/register', '/api']
+    const publicPaths = ['/auth/login', '/auth/register', '/api', '/error']
 
     const isPublic = publicPaths.some(path =>
         event.path.startsWith(path)
