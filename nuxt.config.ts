@@ -30,6 +30,10 @@ export default defineNuxtConfig({
       path: "~/features",
       pathPrefix: false,
     },
+    {
+      path: "~/widgets",
+      pathPrefix: false,
+    },
   ],
   router: {},
   css: ["~/assets/css/main.css"],

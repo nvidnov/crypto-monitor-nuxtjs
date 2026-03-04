@@ -1,19 +1,15 @@
+const privatePaths = ['/profile', '/settings']
+
 export default defineEventHandler((event) => {
-    const token = getCookie(event, 'auth_token')
+  const token = getCookie(event, 'auth_token')
 
-    const publicPaths = ['/auth/login', '/auth/register', '/api', '/error']
+  const isPrivate = privatePaths.some((path) => event.path.startsWith(path))
 
-    const isPublic = publicPaths.some(path =>
-        event.path.startsWith(path)
-    )
+  if (!token && isPrivate) {
+    return sendRedirect(event, '/auth/login')
+  }
 
-    // НЕавторизованный пользователь → не пускаем на приватные страницы
-    if (!token && !isPublic) {
-        return sendRedirect(event, '/auth/login')
-    }
-
-    // Авторизованный → не пускаем на страницы логина
-    if (token && event.path.startsWith('/auth')) {
-        return sendRedirect(event, '/')
-    }
+  if (token && event.path.startsWith('/auth')) {
+    return sendRedirect(event, '/')
+  }
 })

@@ -1,13 +1,18 @@
-import {useUserStore} from "~/entities/user/model/user";
+import { useUserStore } from '~/entities/user/model/user'
+
+const privatePaths = ['/profile', '/settings']
 
 export default defineNuxtRouteMiddleware((to) => {
-    const publicPaths= ['/auth/login', '/auth/register', '/error'];
-    // Блокируем выполнение на сервере
-    if (process.server) return
+  if (process.server) return
 
-    const userStore = useUserStore()
-    const isAuthenticated = userStore.isLoggedIn
-    if (!isAuthenticated &&  !publicPaths.includes(to.path)) {
-        return navigateTo(publicPaths[0])
-    }
+  const userStore = useUserStore()
+  const isAuthenticated = userStore.isLoggedIn
+
+  if (!isAuthenticated && privatePaths.some((p) => to.path.startsWith(p))) {
+    return navigateTo('/auth/login')
+  }
+
+  if (isAuthenticated && to.path.startsWith('/auth')) {
+    return navigateTo('/')
+  }
 })
